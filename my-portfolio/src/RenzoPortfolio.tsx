@@ -40,7 +40,7 @@ interface Experience {
 }
 
 const personalInfo = {
-  name: 'Renso Rafael Martinez',
+  name: 'Renzo Rafael Martinez',
   title: 'Fachinformatiker für Anwendungsentwicklung',
   subtitle: 'Junior-Entwickler',
   location: 'Bremen, Deutschland',
