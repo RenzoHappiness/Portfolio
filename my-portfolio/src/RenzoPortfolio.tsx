@@ -54,8 +54,8 @@ const projects: Project[] = [
     id: 1,
     title: 'Adaptive Quiz-Anwendung',
     description: 'Eine responsive Quiz-App mit dynamischen Schwierigkeitsgraden für verschiedene Altersgruppen. Features: Adaptive Algorithmik, Fortschrittstracking und benutzerfreundliches Design.',
-    technologies: ['React','JavaScript','TypeScript', 'CSS3', 'Local Storage'],
-    year: '2024',
+    technologies: ['React','TypeScript', 'CSS3', 'Local Storage'],
+    year: '2025',
     githubUrl: 'https://github.com/RenzoHappiness/quizapp',
     liveUrl: 'https://renzoquizapp.netlify.app/',
     category: 'Web-Anwendung'
@@ -65,7 +65,7 @@ const projects: Project[] = [
     title: 'Tetris-Klon',
     description: 'Ein vollständig funktionsfähiger Tetris-Klon mit Vanilla JavaScript. Implementiert klassische Spielmechaniken, Score-System und responsive Steuerung.',
     technologies: ['JavaScript', 'HTML5', 'CSS3', 'Canvas API'],
-    year: '2024',
+    year: '2025',
     githubUrl: 'https://github.com/RenzoHappiness/TetrisClon',
     liveUrl: 'https://tetrisclon.netlify.app',
     category: 'Game Development'
