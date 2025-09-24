@@ -42,7 +42,7 @@ interface Experience {
 const personalInfo = {
   name: 'Renzo Rafael Martinez',
   title: 'Fachinformatiker für Anwendungsentwicklung',
-  subtitle: 'Junior-Entwickler',
+  subtitle: 'Junior-Anwendungsentwickler',
   location: 'Bremen, Deutschland',
   email: 'renzo.martinez@web.de',
   linkedin: 'https://www.linkedin.com/in/renzo-rafael-martinez/',
@@ -141,7 +141,7 @@ const SimplePhotoAvatar: React.FC = () => {
             filter: 'contrast(1.05) brightness(1.02)',
           }}
           onError={(e) => {
-            e.currentTarget.src = 'https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face';
+            e.currentTarget.src = 'https://commons.wikimedia.org/wiki/File:No_image_available.svg';
           }}
         />
       </Box>
