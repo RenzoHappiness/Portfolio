@@ -70,6 +70,26 @@ const projects: Project[] = [
     liveUrl: 'https://tetrisclon.netlify.app',
     category: 'Game Development'
   },
+  {
+    id: 3,
+    title: 'Codebreaker',
+    description: 'Ein intelligenter Algorithmus-Solver für das Spiel Mastermind.',
+    technologies: ['JavaScript', 'HTML5', 'CSS3'],
+    year: '2025',
+    githubUrl: 'https://github.com/RenzoHappiness/Codebreaker',
+    liveUrl: 'https://renzohappiness.github.io/Codebreaker/',
+    category: 'Algorithm Tool'
+  },
+  {
+    id: 4,
+    title: 'Herzloser Hase',
+    description: 'Ein interaktives Logo-Personalisierungstool für Vereinsmitglieder. Ermöglicht die Anpassung von Farben und Elementen eines SVG-Logos in Echtzeit.',
+    technologies: ['JavaScript', 'HTML5', 'CSS3', 'SVG-Manipulation'],
+    year: '2025',
+    githubUrl: 'https://github.com/RenzoHappiness/herzloserhase',
+    liveUrl: 'https://renzohappiness.github.io/herzloserhase/',
+    category: 'Design Tool'
+  }
 ];
 
 const experiences: Experience[] = [
