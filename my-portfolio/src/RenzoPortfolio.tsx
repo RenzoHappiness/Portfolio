@@ -42,7 +42,7 @@ interface Experience {
 const personalInfo = {
   name: 'Renzo Rafael Martinez',
   title: 'Fachinformatiker für Anwendungsentwicklung',
-  subtitle: 'Junior-Anwendungsentwickler',
+  subtitle: 'Fachinformatiker für Anwendungsentwicklung',
   location: 'Bremen, Deutschland',
   email: 'renzo.martinez@web.de',
   linkedin: 'https://www.linkedin.com/in/renzo-rafael-martinez/',
