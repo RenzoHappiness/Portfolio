@@ -292,7 +292,15 @@ const Navigation: React.FC = () => {
               aria-label="open drawer"
               edge="start"
               onClick={handleDrawerToggle}
-              sx={{ color: '#667eea' }}
+              sx={{ 
+                color: '#667eea',
+                minWidth: 48,
+                minHeight: 48,
+                padding: 1.5,
+                '&:hover': {
+                  backgroundColor: 'rgba(102, 126, 234, 0.08)',
+                }
+              }}
             >
               <Menu />
             </IconButton>
