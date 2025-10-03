@@ -10,6 +10,13 @@ import {
   Paper,
   Fade,
   useScrollTrigger,
+  Drawer,
+  List,
+  ListItem,
+  ListItemButton,
+  ListItemText,
+  useMediaQuery,
+  useTheme,
 } from '@mui/material';
 import {
   GitHub,
@@ -18,6 +25,7 @@ import {
   Launch,
   KeyboardArrowUp,
   ArrowForward,
+  Menu,
 } from '@mui/icons-material';
 
 
@@ -30,6 +38,7 @@ interface Project {
   githubUrl?: string;
   liveUrl?: string;
   category: string;
+  screenshot?: string;
 }
 
 interface Experience {
@@ -42,7 +51,8 @@ interface Experience {
 const personalInfo = {
   name: 'Renzo Rafael Martinez',
   title: 'Fachinformatiker für Anwendungsentwicklung',
-  subtitle: 'Fachinformatiker für Anwendungsentwicklung',
+  subtitle: 'Frontend-Entwickler & Full-Stack Enthusiast',
+  mission: 'Ich entwickle digitale Lösungen, die das Leben der Menschen verbessern und komplexe Probleme elegant lösen.',
   location: 'Bremen, Deutschland',
   email: 'renzo.martinez@web.de',
   linkedin: 'https://www.linkedin.com/in/renzo-rafael-martinez/',
@@ -55,40 +65,44 @@ const projects: Project[] = [
     title: 'Adaptive Quiz-Anwendung',
     description: 'Eine responsive Quiz-App mit dynamischen Schwierigkeitsgraden für verschiedene Altersgruppen. Features: Adaptive Algorithmik, Fortschrittstracking und benutzerfreundliches Design.',
     technologies: ['React','TypeScript', 'CSS3', 'Local Storage'],
-    year: '2025',
+    year: '2024',
     githubUrl: 'https://github.com/RenzoHappiness/quizapp',
     liveUrl: 'https://renzoquizapp.netlify.app/',
-    category: 'Web-Anwendung'
+    category: 'Web-Anwendung',
+    screenshot: '/images/quiz-app-screenshot.png'
   },
   {
     id: 2,
     title: 'Tetris-Klon',
     description: 'Ein vollständig funktionsfähiger Tetris-Klon mit Vanilla JavaScript. Implementiert klassische Spielmechaniken, Score-System und responsive Steuerung.',
     technologies: ['JavaScript', 'HTML5', 'CSS3', 'Canvas API'],
-    year: '2025',
+    year: '2024',
     githubUrl: 'https://github.com/RenzoHappiness/TetrisClon',
     liveUrl: 'https://tetrisclon.netlify.app',
-    category: 'Game Development'
+    category: 'Game Development',
+    screenshot: '/images/tetris-screenshot.png'
   },
   {
     id: 3,
     title: 'Codebreaker',
     description: 'Ein intelligenter Algorithmus-Solver für das Spiel Mastermind.',
     technologies: ['JavaScript', 'HTML5', 'CSS3'],
-    year: '2025',
+    year: '2024',
     githubUrl: 'https://github.com/RenzoHappiness/Codebreaker',
     liveUrl: 'https://renzohappiness.github.io/Codebreaker/',
-    category: 'Algorithm Tool'
+    category: 'Algorithm Tool',
+    screenshot: '/images/codebreaker-screenshot.png'
   },
   {
     id: 4,
     title: 'Herzloser Hase',
     description: 'Ein interaktives Logo-Personalisierungstool für Vereinsmitglieder. Ermöglicht die Anpassung von Farben und Elementen eines SVG-Logos in Echtzeit.',
     technologies: ['JavaScript', 'HTML5', 'CSS3', 'SVG-Manipulation'],
-    year: '2025',
+    year: '2024',
     githubUrl: 'https://github.com/RenzoHappiness/herzloserhase',
     liveUrl: 'https://renzohappiness.github.io/herzloserhase/',
-    category: 'Design Tool'
+    category: 'Design Tool',
+    screenshot: '/images/herzloser-hase-screenshot.png'
   }
 ];
 
@@ -210,72 +224,137 @@ const ScrollToTop: React.FC = () => {
 
 
 const Navigation: React.FC = () => {
+  const theme = useTheme();
+  const isMobile = useMediaQuery(theme.breakpoints.down('md'));
+  const [mobileOpen, setMobileOpen] = React.useState(false);
+
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
     element?.scrollIntoView({ behavior: 'smooth' });
+    setMobileOpen(false);
   };
 
+  const handleDrawerToggle = () => {
+    setMobileOpen(!mobileOpen);
+  };
+
+  const drawer = (
+    <Box onClick={handleDrawerToggle} sx={{ textAlign: 'center' }}>
+      <Typography variant="h6" sx={{ my: 2, color: '#667eea', fontWeight: 600 }}>
+        {personalInfo.name}
+      </Typography>
+      <List>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => scrollToSection('work')}>
+            <ListItemText primary="Projekte" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => scrollToSection('about')}>
+            <ListItemText primary="Über mich" />
+          </ListItemButton>
+        </ListItem>
+        <ListItem disablePadding>
+          <ListItemButton onClick={() => scrollToSection('contact')}>
+            <ListItemText primary="Kontakt" />
+          </ListItemButton>
+        </ListItem>
+      </List>
+    </Box>
+  );
+
   return (
-    <AppBar 
-      position="fixed" 
-      elevation={0}
-      sx={{ 
-        backgroundColor: 'rgba(255, 255, 255, 0.95)', 
-        backdropFilter: 'blur(10px)',
-        borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
-      }}
-    >
-      <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
-        <Typography 
-          variant="h6" 
-          sx={{ 
-            fontWeight: 600, 
-            color: '#667eea',
-            fontSize: '1rem'
-          }}
-        >
-          {personalInfo.name}
-        </Typography>
-        <Box sx={{ display: { xs: 'none', md: 'flex' }, gap: 4 }}>
-          <Button 
-            color="inherit" 
-            onClick={() => scrollToSection('work')}
+    <>
+      <AppBar 
+        position="fixed" 
+        elevation={0}
+        sx={{ 
+          backgroundColor: 'rgba(255, 255, 255, 0.95)', 
+          backdropFilter: 'blur(10px)',
+          borderBottom: '1px solid rgba(0, 0, 0, 0.08)',
+        }}
+      >
+        <Toolbar sx={{ justifyContent: 'space-between', py: 1 }}>
+          <Typography 
+            variant="h6" 
             sx={{ 
-              color: 'grey.700', 
-              textTransform: 'none',
-              fontWeight: 400,
-              '&:hover': { color: '#667eea' }
+              fontWeight: 600, 
+              color: '#667eea',
+              fontSize: '1rem'
             }}
           >
-            Projekte
-          </Button>
-          <Button 
-            color="inherit" 
-            onClick={() => scrollToSection('about')}
-            sx={{ 
-              color: 'grey.700', 
-              textTransform: 'none',
-              fontWeight: 400,
-              '&:hover': { color: '#667eea' }
-            }}
-          >
-            Über mich
-          </Button>
-          <Button 
-            color="inherit" 
-            onClick={() => scrollToSection('contact')}
-            sx={{ 
-              color: 'grey.700', 
-              textTransform: 'none',
-              fontWeight: 400,
-              '&:hover': { color: '#667eea' }
-            }}
-          >
-            Kontakt
-          </Button>
-        </Box>
-      </Toolbar>
-    </AppBar>
+            {personalInfo.name}
+          </Typography>
+          
+          {isMobile ? (
+            <IconButton
+              color="inherit"
+              aria-label="open drawer"
+              edge="start"
+              onClick={handleDrawerToggle}
+              sx={{ color: '#667eea' }}
+            >
+              <Menu />
+            </IconButton>
+          ) : (
+            <Box sx={{ display: 'flex', gap: 4 }}>
+              <Button 
+                color="inherit" 
+                onClick={() => scrollToSection('work')}
+                sx={{ 
+                  color: 'grey.700', 
+                  textTransform: 'none',
+                  fontWeight: 400,
+                  '&:hover': { color: '#667eea' }
+                }}
+              >
+                Projekte
+              </Button>
+              <Button 
+                color="inherit" 
+                onClick={() => scrollToSection('about')}
+                sx={{ 
+                  color: 'grey.700', 
+                  textTransform: 'none',
+                  fontWeight: 400,
+                  '&:hover': { color: '#667eea' }
+                }}
+              >
+                Über mich
+              </Button>
+              <Button 
+                color="inherit" 
+                onClick={() => scrollToSection('contact')}
+                sx={{ 
+                  color: 'grey.700', 
+                  textTransform: 'none',
+                  fontWeight: 400,
+                  '&:hover': { color: '#667eea' }
+                }}
+              >
+                Kontakt
+              </Button>
+            </Box>
+          )}
+        </Toolbar>
+      </AppBar>
+      
+      <Drawer
+        variant="temporary"
+        anchor="right"
+        open={mobileOpen}
+        onClose={handleDrawerToggle}
+        ModalProps={{
+          keepMounted: true,
+        }}
+        sx={{
+          display: { xs: 'block', md: 'none' },
+          '& .MuiDrawer-paper': { boxSizing: 'border-box', width: 240 },
+        }}
+      >
+        {drawer}
+      </Drawer>
+    </>
   );
 };
 
@@ -328,10 +407,26 @@ const HeroSection: React.FC = () => {
                 color: 'grey.700',
                 fontWeight: 300,
                 maxWidth: 600,
-                mb: 6,
+                mb: 3,
               }}
             >
               {personalInfo.subtitle}
+            </Typography>
+
+            <Typography 
+              variant="body1" 
+              paragraph 
+              sx={{ 
+                fontSize: { xs: '1rem', md: '1.125rem' },
+                lineHeight: 1.7,
+                color: 'grey.600',
+                fontWeight: 400,
+                maxWidth: 600,
+                mb: 6,
+                fontStyle: 'italic',
+              }}
+            >
+              {personalInfo.mission}
             </Typography>
 
             <Button
@@ -389,102 +484,129 @@ const WorkSection: React.FC = () => {
 
         <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 4, lg: 5 } }}>
           {projects.map((project) => (
-            <Paper key={project.id} elevation={0} sx={{ p: 3, border: '1px solid', borderColor: 'grey.200', position: 'relative' }}>
-              <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
-                <Typography 
-                  variant="h4" 
-                  sx={{ 
-                    fontSize: { xs: '1.25rem', md: '1.5rem' },
-                    fontWeight: 500,
-                    color: 'black',
-                  }}
-                >
-                  {project.title}
-                </Typography>
-                <Typography 
-                  variant="body2" 
-                  sx={{ 
-                    color: 'grey.500',
-                    fontSize: '0.875rem',
-                    ml: 2,
-                    flexShrink: 0,
-                  }}
-                >
-                  {project.year}
-                </Typography>
-              </Box>
-              <Typography 
-                variant="body1" 
-                paragraph 
-                sx={{ 
-                  color: 'grey.700',
-                  lineHeight: 1.7,
-                  fontSize: '0.95rem',
-                  mb: 2,
-                }}
-              >
-                {project.description}
-              </Typography>
-              <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.0, mb: 2 }}>
-                {project.technologies.map((tech) => (
-                  <Typography
-                    key={tech}
-                    variant="caption"
-                    sx={{
-                      backgroundColor: 'rgba(102, 126, 234, 0.1)',
-                      color: '#667eea',
-                      px: 1.5,
-                      py: 0.5,
-                      borderRadius: 1,
-                      fontSize: '0.75rem',
+            <Paper key={project.id} elevation={0} sx={{ border: '1px solid', borderColor: 'grey.200', position: 'relative', overflow: 'hidden' }}>
+              {/* Screenshot */}
+              {project.screenshot && (
+                <Box sx={{ height: 200, overflow: 'hidden' }}>
+                  <img 
+                    src={project.screenshot}
+                    alt={`${project.title} Screenshot`}
+                    style={{
+                      width: '100%',
+                      height: '100%',
+                      objectFit: 'cover',
+                      transition: 'transform 0.3s ease-in-out',
+                    }}
+                    onError={(e) => {
+                      e.currentTarget.style.display = 'none';
+                    }}
+                    onMouseEnter={(e) => {
+                      e.currentTarget.style.transform = 'scale(1.05)';
+                    }}
+                    onMouseLeave={(e) => {
+                      e.currentTarget.style.transform = 'scale(1)';
+                    }}
+                  />
+                </Box>
+              )}
+              
+              <Box sx={{ p: 3 }}>
+                <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
+                  <Typography 
+                    variant="h4" 
+                    sx={{ 
+                      fontSize: { xs: '1.25rem', md: '1.5rem' },
                       fontWeight: 500,
+                      color: 'black',
                     }}
                   >
-                    {tech}
+                    {project.title}
                   </Typography>
-                ))}
-              </Box>
-              <Box sx={{ display: 'flex', gap: 3 }}>
-                {project.githubUrl && (
-                  <Button
-                    startIcon={<GitHub />}
-                    href={project.githubUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{
-                      color: '#667eea',
-                      textTransform: 'none',
-                      p: 0,
-                      fontWeight: 500,
-                      '&:hover': { 
-                        backgroundColor: 'transparent',
-                        color: '#5a67d8',
-                      }
+                  <Typography 
+                    variant="body2" 
+                    sx={{ 
+                      color: 'grey.500',
+                      fontSize: '0.875rem',
+                      ml: 2,
+                      flexShrink: 0,
                     }}
                   >
-                    Code ansehen
-                  </Button>
-                )}
-                {project.liveUrl && (
-                  <Button
-                    startIcon={<Launch />}
-                    href={project.liveUrl}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    sx={{
-                      color: '#667eea',
-                      textTransform: 'none',
-                      p: 0,
-                      fontWeight: 500,
-                      '&:hover': { 
-                        backgroundColor: 'transparent',
-                        color: '#5a67d8',
-                      }
-                    }}
-                  >
-                    Live Demo
-                  </Button>
-                )}
+                    {project.year}
+                  </Typography>
+                </Box>
+                <Typography 
+                  variant="body1" 
+                  paragraph 
+                  sx={{ 
+                    color: 'grey.700',
+                    lineHeight: 1.7,
+                    fontSize: '0.95rem',
+                    mb: 2,
+                  }}
+                >
+                  {project.description}
+                </Typography>
+                <Box sx={{ display: 'flex', flexWrap: 'wrap', gap: 1.0, mb: 2 }}>
+                  {project.technologies.map((tech) => (
+                    <Typography
+                      key={tech}
+                      variant="caption"
+                      sx={{
+                        backgroundColor: 'rgba(102, 126, 234, 0.1)',
+                        color: '#667eea',
+                        px: 1.5,
+                        py: 0.5,
+                        borderRadius: 1,
+                        fontSize: '0.75rem',
+                        fontWeight: 500,
+                      }}
+                    >
+                      {tech}
+                    </Typography>
+                  ))}
+                </Box>
+                <Box sx={{ display: 'flex', gap: 3 }}>
+                  {project.githubUrl && (
+                    <Button
+                      startIcon={<GitHub />}
+                      href={project.githubUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        color: '#667eea',
+                        textTransform: 'none',
+                        p: 0,
+                        fontWeight: 500,
+                        '&:hover': { 
+                          backgroundColor: 'transparent',
+                          color: '#5a67d8',
+                        }
+                      }}
+                    >
+                      Code ansehen
+                    </Button>
+                  )}
+                  {project.liveUrl && (
+                    <Button
+                      startIcon={<Launch />}
+                      href={project.liveUrl}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      sx={{
+                        color: '#667eea',
+                        textTransform: 'none',
+                        p: 0,
+                        fontWeight: 500,
+                        '&:hover': { 
+                          backgroundColor: 'transparent',
+                          color: '#5a67d8',
+                        }
+                      }}
+                    >
+                      Live Demo
+                    </Button>
+                  )}
+                </Box>
               </Box>
             </Paper>
           ))}
@@ -787,7 +909,7 @@ const Footer: React.FC = () => {
             fontSize: '0.875rem',
           }}
         >
-          © 2024 {personalInfo.name}. Entwickelt mit React & TypeScript.
+          © 2025 {personalInfo.name}. Entwickelt mit React & TypeScript.
         </Typography>
       </Container>
     </Box>
