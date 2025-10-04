@@ -200,18 +200,22 @@ const ScrollToTop: React.FC = () => {
         onClick={handleClick}
         sx={{
           position: 'fixed',
-          bottom: 24,
-          right: 24,
+          bottom: { xs: 16, md: 24 },
+          right: { xs: 16, md: 24 },
           backgroundColor: '#667eea',
           color: 'white',
-          width: 48,
-          height: 48,
+          width: { xs: 56, md: 48 },
+          height: { xs: 56, md: 48 },
           zIndex: 1000,
           boxShadow: '0 4px 20px rgba(102, 126, 234, 0.4)',
           '&:hover': {
             backgroundColor: '#5a67d8',
             transform: 'translateY(-2px)',
             boxShadow: '0 6px 25px rgba(102, 126, 234, 0.5)',
+          },
+          '&:active': {
+            transform: 'translateY(0px)',
+            boxShadow: '0 2px 10px rgba(102, 126, 234, 0.3)',
           },
           transition: 'all 0.3s ease-in-out',
         }}
@@ -245,18 +249,69 @@ const Navigation: React.FC = () => {
       </Typography>
       <List>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => scrollToSection('work')}>
-            <ListItemText primary="Projekte" />
+          <ListItemButton 
+            onClick={() => scrollToSection('work')}
+            sx={{ 
+              minHeight: 56,
+              padding: 2,
+              '&:hover': {
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
+              }
+            }}
+          >
+            <ListItemText 
+              primary="Projekte" 
+              sx={{ 
+                '& .MuiListItemText-primary': {
+                  fontSize: '1.1rem',
+                  fontWeight: 500,
+                }
+              }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => scrollToSection('about')}>
-            <ListItemText primary="Über mich" />
+          <ListItemButton 
+            onClick={() => scrollToSection('about')}
+            sx={{ 
+              minHeight: 56,
+              padding: 2,
+              '&:hover': {
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
+              }
+            }}
+          >
+            <ListItemText 
+              primary="Über mich" 
+              sx={{ 
+                '& .MuiListItemText-primary': {
+                  fontSize: '1.1rem',
+                  fontWeight: 500,
+                }
+              }}
+            />
           </ListItemButton>
         </ListItem>
         <ListItem disablePadding>
-          <ListItemButton onClick={() => scrollToSection('contact')}>
-            <ListItemText primary="Kontakt" />
+          <ListItemButton 
+            onClick={() => scrollToSection('contact')}
+            sx={{ 
+              minHeight: 56,
+              padding: 2,
+              '&:hover': {
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
+              }
+            }}
+          >
+            <ListItemText 
+              primary="Kontakt" 
+              sx={{ 
+                '& .MuiListItemText-primary': {
+                  fontSize: '1.1rem',
+                  fontWeight: 500,
+                }
+              }}
+            />
           </ListItemButton>
         </ListItem>
       </List>
@@ -490,9 +545,29 @@ const WorkSection: React.FC = () => {
           Meine Projekte.
         </Typography>
 
-        <Box sx={{ display: 'grid', gridTemplateColumns: { xs: '1fr', md: '1fr 1fr' }, gap: { xs: 4, lg: 5 } }}>
+        <Box sx={{ 
+          display: 'grid', 
+          gridTemplateColumns: { xs: '1fr', sm: '1fr', md: '1fr 1fr' }, 
+          gap: { xs: 3, sm: 4, lg: 5 },
+          maxWidth: { xs: '100%', md: 'none' }
+        }}>
           {projects.map((project) => (
-            <Paper key={project.id} elevation={0} sx={{ border: '1px solid', borderColor: 'grey.200', position: 'relative', overflow: 'hidden' }}>
+            <Paper 
+              key={project.id} 
+              elevation={0} 
+              sx={{ 
+                border: '1px solid', 
+                borderColor: 'grey.200', 
+                position: 'relative', 
+                overflow: 'hidden',
+                borderRadius: { xs: 3, md: 2 },
+                transition: 'all 0.3s ease-in-out',
+                '&:hover': {
+                  transform: { xs: 'none', md: 'translateY(-4px)' },
+                  boxShadow: { xs: 'none', md: '0 8px 25px rgba(0, 0, 0, 0.1)' },
+                }
+              }}
+            >
               {/* Screenshot */}
               {project.screenshot && (
                 <Box sx={{ height: 200, overflow: 'hidden' }}>
@@ -518,7 +593,7 @@ const WorkSection: React.FC = () => {
                 </Box>
               )}
               
-              <Box sx={{ p: 3 }}>
+              <Box sx={{ p: { xs: 2.5, md: 3 } }}>
                 <Box sx={{ display: 'flex', justifyContent: 'space-between', alignItems: 'flex-start', mb: 2 }}>
                   <Typography 
                     variant="h4" 
@@ -573,7 +648,7 @@ const WorkSection: React.FC = () => {
                     </Typography>
                   ))}
                 </Box>
-                <Box sx={{ display: 'flex', gap: 3 }}>
+                <Box sx={{ display: 'flex', gap: 3, flexWrap: 'wrap' }}>
                   {project.githubUrl && (
                     <Button
                       startIcon={<GitHub />}
@@ -583,10 +658,13 @@ const WorkSection: React.FC = () => {
                       sx={{
                         color: '#667eea',
                         textTransform: 'none',
-                        p: 0,
+                        p: { xs: 1.5, md: 1 },
+                        minHeight: { xs: 48, md: 'auto' },
                         fontWeight: 500,
+                        fontSize: { xs: '0.9rem', md: '0.875rem' },
+                        borderRadius: 2,
                         '&:hover': { 
-                          backgroundColor: 'transparent',
+                          backgroundColor: 'rgba(102, 126, 234, 0.08)',
                           color: '#5a67d8',
                         }
                       }}
@@ -603,10 +681,13 @@ const WorkSection: React.FC = () => {
                       sx={{
                         color: '#667eea',
                         textTransform: 'none',
-                        p: 0,
+                        p: { xs: 1.5, md: 1 },
+                        minHeight: { xs: 48, md: 'auto' },
                         fontWeight: 500,
+                        fontSize: { xs: '0.9rem', md: '0.875rem' },
+                        borderRadius: 2,
                         '&:hover': { 
-                          backgroundColor: 'transparent',
+                          backgroundColor: 'rgba(102, 126, 234, 0.08)',
                           color: '#5a67d8',
                         }
                       }}
@@ -841,7 +922,7 @@ const ContactSection: React.FC = () => {
           Ich freue mich auf Ihre Nachricht und neue Herausforderungen.
         </Typography>
 
-        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 3, maxWidth: 300 }}>
+        <Box sx={{ display: 'flex', flexDirection: 'column', gap: 2, maxWidth: 300 }}>
           <Button
             startIcon={<Email />}
             href={`mailto:${personalInfo.email}`}
@@ -849,10 +930,13 @@ const ContactSection: React.FC = () => {
               justifyContent: 'flex-start',
               color: '#667eea',
               textTransform: 'none',
-              p: 0,
+              p: { xs: 2, md: 1.5 },
+              minHeight: { xs: 56, md: 48 },
               fontWeight: 500,
+              fontSize: { xs: '1rem', md: '0.875rem' },
+              borderRadius: 2,
               '&:hover': { 
-                backgroundColor: 'transparent',
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
                 color: '#5a67d8',
               }
             }}
@@ -869,10 +953,13 @@ const ContactSection: React.FC = () => {
               justifyContent: 'flex-start',
               color: '#667eea',
               textTransform: 'none',
-              p: 0,
+              p: { xs: 2, md: 1.5 },
+              minHeight: { xs: 56, md: 48 },
               fontWeight: 500,
+              fontSize: { xs: '1rem', md: '0.875rem' },
+              borderRadius: 2,
               '&:hover': { 
-                backgroundColor: 'transparent',
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
                 color: '#5a67d8',
               }
             }}
@@ -889,10 +976,13 @@ const ContactSection: React.FC = () => {
               justifyContent: 'flex-start',
               color: '#667eea',
               textTransform: 'none',
-              p: 0,
+              p: { xs: 2, md: 1.5 },
+              minHeight: { xs: 56, md: 48 },
               fontWeight: 500,
+              fontSize: { xs: '1rem', md: '0.875rem' },
+              borderRadius: 2,
               '&:hover': { 
-                backgroundColor: 'transparent',
+                backgroundColor: 'rgba(102, 126, 234, 0.08)',
                 color: '#5a67d8',
               }
             }}
