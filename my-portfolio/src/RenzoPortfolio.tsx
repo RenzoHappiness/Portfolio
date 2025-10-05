@@ -423,13 +423,21 @@ const Navigation: React.FC = () => {
 
 
 const HeroSection: React.FC = () => {
+  const prefersReducedMotion = typeof window !== 'undefined' && window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   return (
     <Box
       sx={{
         minHeight: '100vh',
         display: 'flex',
         alignItems: 'center',
-        background: 'linear-gradient(135deg, #f5f7fa 0%, #c3cfe2 100%)',
+        // Parallax: fixed background image with gradient overlay; falls back gracefully if reduced motion is preferred
+        background: prefersReducedMotion
+          ? 'linear-gradient(rgba(245,247,250,0.6), rgba(195,207,226,0.6)), url(/images/hero.jpg)'
+          : 'linear-gradient(rgba(245,247,250,0.6), rgba(195,207,226,0.6)), url(/images/hero.jpg)',
+        backgroundAttachment: prefersReducedMotion ? 'scroll' : 'fixed',
+        backgroundRepeat: 'no-repeat',
+        backgroundSize: 'cover',
+        backgroundPosition: 'center top',
         pt: 8,
       }}
     >
