@@ -1,4 +1,4 @@
-# 💼 Portfolio - Renzo Rafael Martinez
+# Portfolio - Renzo Rafael Martinez
 
 Ein modernes, minimalistisches Portfolio, das meine Projekte und Fähigkeiten als Fachinformatiker für Anwendungsentwicklung präsentiert.
 
